@@ -1,7 +1,7 @@
 <?php
 $server = "localhost";
-$user = "root";
-$pass = "";
+$user = "wahyu";
+$pass = "wahyu";
 $db = "db_toko_buku_uas";
 
 $conn = mysqli_connect($server, $user, $pass, $db);

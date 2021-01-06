@@ -9,7 +9,7 @@
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Kategori</h1>
-    <a class="btn btn-sm btn-primary px-2" href="add.php">Tambah kategori</a>
+    <a class="btn btn-sm btn-info px-2" href="add.php">Tambah kategori</a>
   </div>
 
   <?php

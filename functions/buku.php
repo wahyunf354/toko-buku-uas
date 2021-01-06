@@ -12,8 +12,8 @@ function getAllBooks()
             tb_buku.buku_id, 
             tb_gambar.url,
             tb_kategori.nama_kategori
-            FROM tb_buku INNER JOIN tb_kategori ON tb_buku.kategori_id=tb_kategori.kategori_id
-            INNER JOIN tb_gambar ON tb_buku.buku_id=tb_gambar.buku_id;";
+            FROM tb_buku INNER JOIN tb_kategori ON tb_buku.kategori_id=tb_kategori.kategori_id 
+            LEFT JOIN tb_gambar ON tb_buku.buku_id=tb_gambar.buku_id;";
 
   $result = mysqli_query($conn, $query);
   $rows = [];
@@ -120,58 +120,4 @@ function getCountBook()
   $query = "SELECT COUNT(*) FROM tb_buku";
   $result = mysqli_query($conn, $query);
   return mysqli_fetch_array($result)[0];
-}
-
-function upload($data)
-{
-  global $conn;
-
-  $buku_id = $data['buku_id'];
-  $namaFile = $_FILES['url']['name'];
-  $ukuranFile = $_FILES['url']['size'];
-  $error = $_FILES['url']['error'];
-  $tmpName = $_FILES['url']['tmp_name'];
-
-  // cek apakah tidak ada gambar yang diupload
-  if ($error === 4) {
-    echo "<script>
-            alert('pilih gambar terlebih dahulu');
-          </script>";
-    return false;
-  }
-
-  // yang diupload gambar atau bukan
-  $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
-  $ekstensiGambar = explode('.', $namaFile);
-  $ekstensiGambar = strtolower(end($ekstensiGambar));
-  if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
-    echo "<script>
-            alert('yang anda upload bukan gambar');
-          </script>";
-    return false;
-  }
-
-  // jika ukuran terlalu besar
-  if ($ukuranFile > 1000000) {
-    echo "<script>
-            alert('ukuran gambar terlalu besar');
-          </script>";
-    return false;
-  }
-
-  // siap diupload
-  $namaFileBaru = uniqid();
-  $namaFileBaru .= ".";
-  $namaFileBaru .= $ekstensiGambar;
-  move_uploaded_file($tmpName, '../assets/img/' . $namaFileBaru);
-
-  $query = "INSERT INTO tb_gambar(buku_id, `url`) VALUES ('$buku_id', '$namaFileBaru');";
-
-  mysqli_query($conn, $query);
-
-  if (mysqli_affected_rows($conn) > 0) {
-    return true;
-  } else {
-    return false;
-  }
 }

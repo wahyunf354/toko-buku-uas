@@ -53,7 +53,7 @@
             <?php endforeach; ?>
           </select>
         </div>
-        <button class="btn btn-primary" type="submit" name="submit">Simpan</button>
+        <button class="btn btn-info" type="submit" name="submit">Simpan</button>
       </form>
     </div>
   </div>

@@ -39,7 +39,7 @@
           <label for="nama_kategori" class="form-label">Nama</label>
           <input type="text" class="form-control" value="<?= $category['nama_kategori']; ?>" name="nama_kategori" id="nama_kategori" placeholder="Masukan nama...">
         </div>
-        <button class="btn btn-primary" type="submit" name="submit">Simpan</button>
+        <button class="btn btn-info" type="submit" name="submit">Simpan</button>
       </form>
     </div>
   </div>

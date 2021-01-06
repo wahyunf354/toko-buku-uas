@@ -25,7 +25,7 @@ if (isset($_POST['upload'])) {
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Buku</h1>
-    <a class="btn btn-sm btn-primary px-2" href="add.php">Tambah Buku</a>
+    <a class="btn btn-sm btn-info px-2" href="add.php">Tambah Buku</a>
   </div>
 
 
@@ -40,7 +40,7 @@ if (isset($_POST['upload'])) {
             <h4 class="card-title text-dark"><?= $book['judul_buku']; ?></h4>
             <p class="card-text text-dark"><?= $book['pengarang']; ?>, <?= $book['tahun_terbit'] ?></p>
             <p class="card-text text-muted"><?= $book['nama_kategori']; ?></p>
-            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#gambar-bukuphpp<?= $book['buku_id'] ?>">
+            <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#gambar-bukuphpp<?= $book['buku_id'] ?>">
               <i class="fas fa-camera"></i>
             </a>
             <a href="edit.php?id=<?= $book['buku_id']; ?>" class="btn btn-warning btn-sm">Edit</a>
@@ -68,7 +68,7 @@ if (isset($_POST['upload'])) {
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" name="upload" class="btn btn-primary">Save</button>
+                <button type="submit" name="upload" class="btn btn-info">Save</button>
               </div>
             </form>
           </div>
