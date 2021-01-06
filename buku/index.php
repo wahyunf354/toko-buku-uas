@@ -5,6 +5,17 @@
 <?php
 include "../functions/buku.php";
 $books = getAllBooks();
+if (isset($_POST['upload'])) {
+  if (addGambar($_POST)) {
+    echo "<div class='alert alert-success' role='alert'>
+          Gambar berhasil diunggah
+        </div>";
+  } else {
+    echo "<div class='alert alert-danger' role='alert'>
+          Gambar gagal diunggah
+        </div>";
+  }
+}
 
 ?>
 
@@ -24,13 +35,42 @@ $books = getAllBooks();
     <?php foreach ($books as $book) : ?>
       <div class="col-md-3 col-12">
         <div class="card">
-          <img src="/toko-buku-uas/assets/img/<?= $book['url']; ?>" class="card-img-top" alt="...">
+          <img src="<?= $book['url'] ? $book['url'] : "/toko-buku-uas/assets/img/book.jpeg" ?>" class="card-img-top" alt="...">
           <div class="card-body">
             <h4 class="card-title text-dark"><?= $book['judul_buku']; ?></h4>
             <p class="card-text text-dark"><?= $book['pengarang']; ?>, <?= $book['tahun_terbit'] ?></p>
             <p class="card-text text-muted"><?= $book['nama_kategori']; ?></p>
-            <a href="#" class="btn btn-warning">Edit</a>
-            <a href="#" class="btn btn-danger">Delete</a>
+            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#gambar-bukuphpp<?= $book['buku_id'] ?>">
+              <i class="fas fa-camera"></i>
+            </a>
+            <a href="edit.php?id=<?= $book['buku_id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+            <a href="delete.php?id=<?= $book['buku_id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="gambar-bukuphpp<?= $book['buku_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Unggah Gambar</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="buku_id" value="<?= $book['buku_id'] ?>">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="url<?= $book['buku_id'] ?>" class="form-label">Gambar</label>
+                  <input type="text" class="form-control" name="url" id="url<?= $book['buku_id'] ?>">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" name="upload" class="btn btn-primary">Save</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
